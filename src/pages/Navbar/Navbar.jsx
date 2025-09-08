@@ -39,8 +39,8 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-3">
-                   <NavLink to="logIn" className="btn btn-primary btn-outline text-sm md:text-lg">LogIn</NavLink>
-                   <NavLink to="logOut" className="btn btn-primary btn-outline text-sm md:text-lg">LogOut</NavLink>
+                   <NavLink to="/logIn" className="btn btn-primary btn-outline text-sm md:text-lg">LogIn</NavLink>
+                   <NavLink to="/signUp" className="btn btn-primary btn-outline text-sm md:text-lg">SignUP</NavLink>
                 </div>
             </div>
         </div>
