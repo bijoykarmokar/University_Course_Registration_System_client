@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import SocialLogIn from "../../components/SocialLogIn";
 
 const Registration = () => {
   const {createUser} = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -21,7 +22,7 @@ const Registration = () => {
      }).catch(error=>{
       console.log(error.message);
      })
-   
+   navigate("/");
   };
   return (
     <div>
