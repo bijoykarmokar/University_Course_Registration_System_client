@@ -20,15 +20,14 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "bg-indigo-600 text-white" : " "
-          }
-          to="/about"
-        >
-          About
-        </NavLink>
+        <NavLink  className={({ isActive }) =>isActive ? "bg-indigo-600 text-white" : " "}  to="/students">Students</NavLink>
       </li>
+       <li>
+        <NavLink  className={({ isActive }) =>isActive ? "bg-indigo-600 text-white" : " "} to="/courses">Courses</NavLink>
+       </li>
+       <li>
+          <NavLink  className={({ isActive }) =>isActive ? "bg-indigo-600 text-white" : " "}  to="/register">Register Courses</NavLink>
+       </li>
     </>
   );
 
