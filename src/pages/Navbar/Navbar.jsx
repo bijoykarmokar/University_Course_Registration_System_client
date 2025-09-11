@@ -3,115 +3,264 @@ import { NavLink } from "react-router";
 import Logo from "../../assets/BRUR_Logo.png";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import ThemeToggle from "../../components/ThemeToggle";
+import { ROLES } from "../../Utils/roles.js";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
 
-  const links = (
-    <>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "bg-indigo-600 text-white" : " "
-          }
-          to="/"
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink  className={({ isActive }) =>isActive ? "bg-indigo-600 text-white" : " "}  to="/students">Students</NavLink>
-      </li>
-       <li>
-        <NavLink  className={({ isActive }) =>isActive ? "bg-indigo-600 text-white" : " "} to="/courses">Courses</NavLink>
-       </li>
-       <li>
-          <NavLink  className={({ isActive }) =>isActive ? "bg-indigo-600 text-white" : " "}  to="/register">Register Courses</NavLink>
-       </li>
-    </>
-  );
+  // Role-based links
+  const links = () => {
+    if (!user) return null; // not logged in
 
-  const handleLogOut = ()=>{
-    logOut()
-    .then(()=>{
-       toast.success("LogOut successfully.");
-    })
-    .catch(()=>{
-        toast.error("Something went worng!");
-    })
-  }
-  return (
-    <div>
-      <div className="navbar bg-base-100 shadow-sm">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+    switch (user.role) {
+      case ROLES.ADMIN:
+        return (
+          <>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/admin/dashboard"
               >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/students"
+              >
+                Students
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/courses"
+              >
+                Courses
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/registrations"
+              >
+                Registrations
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/advisors"
+              >
+                Advisors
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/departments"
+              >
+                Departments
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/timetables"
+              >
+                TimeTables
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/grades"
+              >
+                Grades
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/users"
+              >
+                Users
+              </NavLink>
+            </li>
+          </>
+        );
+
+      case ROLES.STUDENT:
+        return (
+          <>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/student/dashboard"
+              >
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/courses"
+              >
+                Courses
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/registrations"
+              >
+                Register Courses
+              </NavLink>
+            </li>
+          </>
+        );
+
+      case ROLES.ADVISOR:
+        return (
+          <>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/advisor/dashboard"
+              >
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/students"
+              >
+                My Students
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "bg-indigo-600 text-white" : ""
+                }
+                to="/timetables"
+              >
+                TimeTables
+              </NavLink>
+            </li>
+          </>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => toast.success("LogOut successfully."))
+      .catch(() => toast.error("Something went wrong!"));
+  };
+
+  return (
+    <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              {links}
-            </ul>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
           </div>
-          <div className="flex items-center justify-center gap-1">
-            <NavLink>
-              <img className="w-12 h-14" src={Logo} alt="LOGO NOT FOUND" />
-            </NavLink>
-            <div>
-              <p className="text-sm md:text-lg lg:text-xl font-bold">
-                Begum Rokeya University,Rangpur
-              </p>
-              <p className="text-sm md:text-lg lg:text-xl font-bold">
-                বেগম রোকেয়া বিশ্ববিদ্যালয়, রংপুর
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-sm md:text-lg font-semibold">
-            {links}
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
+            {links()}
           </ul>
         </div>
-        <div className="navbar-end gap-3">
-          {user && user.email ? (
-            <>
-              <button onClick={handleLogOut} className="btn btn-primary btn-outline text-sm md:text-lg">
-                LogOut
-              </button>
-            </>
-          ) : (
-            <>
-              <NavLink
-                to="/logIn"
-                className="btn btn-primary btn-outline text-sm md:text-lg"
-              >
-                LogIn
-              </NavLink>
-              <NavLink
-                to="/signUp"
-                className="btn btn-primary btn-outline text-sm md:text-lg"
-              >
-                SignUP
-              </NavLink>
-            </>
-          )}
+        <div className="flex items-center justify-center gap-1">
+          <NavLink>
+            <img className="w-12 h-14" src={Logo} alt="LOGO NOT FOUND" />
+          </NavLink>
+          <div>
+            <p className="text-sm md:text-lg lg:text-xl font-bold">
+              Begum Rokeya University,Rangpur
+            </p>
+            <p className="text-sm md:text-lg lg:text-xl font-bold">
+              বেগম রোকেয়া বিশ্ববিদ্যালয়, রংপুর
+            </p>
+          </div>
         </div>
+      </div>
+
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 text-sm md:text-lg font-semibold">
+          {links()}
+        </ul>
+      </div>
+
+      <div className="navbar-end gap-3">
+        <ThemeToggle />
+        {user && user.email ? (
+          <button
+            onClick={handleLogOut}
+            className="btn btn-primary btn-outline text-sm md:text-lg"
+          >
+            LogOut
+          </button>
+        ) : (
+          <>
+            <NavLink
+              to="/login"
+              className="btn btn-primary btn-outline text-sm md:text-lg"
+            >
+              LogIn
+            </NavLink>
+            <NavLink
+              to="/signup"
+              className="btn btn-primary btn-outline text-sm md:text-lg"
+            >
+              SignUp
+            </NavLink>
+          </>
+        )}
       </div>
     </div>
   );
