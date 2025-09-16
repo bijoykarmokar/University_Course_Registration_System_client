@@ -46,7 +46,7 @@ const handleDelete = async (id) => {
           text: "Student deleted successfully.",
           icon: "success",
         });
-        refetch(); // refresh list
+        refetch(); 
       }
     } catch (error) {
       Swal.fire({

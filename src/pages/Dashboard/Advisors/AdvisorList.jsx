@@ -1,28 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { FaChalkboardTeacher } from "react-icons/fa";
-import axiosSecure from "../../services/axiosSecure";
+import axiosSecure from "../../../services/axiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 export default function AdvisorList() {
-  const [advisors, setAdvisors] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [advisors, setAdvisors] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchAdvisors = async () => {
-      try {
-        const res = await axiosSecure.get("/advisors");
-        setAdvisors(res.data);
-      } catch (err) {
-        console.error("Error fetching advisors:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchAdvisors();
-  }, []);
+   const {data:advisors=[],isLoading} = useQuery({
+     queryKey:["advisors"],
+     queryFn: async()=>{
+      const res = await axiosSecure.get("/advisors");
+      return res.data;
+     }
+   })
 
-  if (loading) {
-    return <div className="text-center py-8">Loading advisors...</div>;
+
+  // useEffect(() => {
+  //   const fetchAdvisors = async () => {
+  //     try {
+  //       const res = await axiosSecure.get("/advisors");
+  //       setAdvisors(res.data);
+  //     } catch (err) {
+  //       console.error("Error fetching advisors:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchAdvisors();
+  // }, []);
+
+  if (isLoading) {
+    return <div className="text-center py-8"> <span className="loading loading-dots loading-xl"></span></div>;
   }
 
   return (
