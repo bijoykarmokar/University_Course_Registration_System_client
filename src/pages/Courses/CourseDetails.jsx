@@ -5,7 +5,7 @@ import axiosSecure from "../../services/axiosSecure";
 
 
 export default function CourseDetails() {
-  const { id } = useParams(); // URL থেকে course ID
+  const { id } = useParams();
   const navigate = useNavigate();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);

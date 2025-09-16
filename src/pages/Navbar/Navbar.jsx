@@ -1,191 +1,33 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router"; 
 import Logo from "../../assets/BRUR_Logo.png";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import ThemeToggle from "../../components/ThemeToggle";
-import { ROLES } from "../../Utils/roles.js";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
 
-  // Role-based links
-  const links = () => {
-    if (!user) return null; // not logged in
 
-    switch (user.role) {
-      case ROLES.ADMIN:
-        return (
+  const links = 
+    
           <>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/admin/dashboard"
-              >
-                Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/students"
-              >
-                Students
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/courses"
-              >
-                Courses
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/registrations"
-              >
-                Registrations
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/advisors"
-              >
-                Advisors
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/departments"
-              >
-                Departments
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/timetables"
-              >
-                TimeTables
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/grades"
-              >
-                Grades
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/users"
-              >
-                Users
-              </NavLink>
-            </li>
+          <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/studentsForm">StudentsForm</NavLink></li>
+            {/* <li><NavLink to="/courses">Courses</NavLink></li> */}
+            <li><NavLink to="/registrations">Registrations</NavLink></li>
+            {/* <li><NavLink to="/advisors">Advisors</NavLink></li>
+            <li><NavLink to="/departments">Departments</NavLink></li>
+            <li><NavLink to="/timetables">TimeTables</NavLink></li>
+            <li><NavLink to="/grades">Grades</NavLink></li>
+            <li><NavLink to="/users">Users</NavLink></li> */}
+            {
+              user && <>
+              <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+              </>
+            }
           </>
-        );
 
-      case ROLES.STUDENT:
-        return (
-          <>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/student/dashboard"
-              >
-                Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/courses"
-              >
-                Courses
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/registrations"
-              >
-                Register Courses
-              </NavLink>
-            </li>
-          </>
-        );
-
-      case ROLES.ADVISOR:
-        return (
-          <>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/advisor/dashboard"
-              >
-                Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/students"
-              >
-                My Students
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "bg-indigo-600 text-white" : ""
-                }
-                to="/timetables"
-              >
-                TimeTables
-              </NavLink>
-            </li>
-          </>
-        );
-
-      default:
-        return null;
-    }
-  };
 
   const handleLogOut = () => {
     logOut()
@@ -195,7 +37,9 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
+      {/* Navbar Start */}
       <div className="navbar-start">
+        {/* Mobile Dropdown */}
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -210,18 +54,20 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            {links()}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+          > 
+            {links}
           </ul>
         </div>
+
+        {/* Logo */}
         <div className="flex items-center justify-center gap-1">
-          <NavLink>
+          <NavLink to="/">
             <img className="w-12 h-14" src={Logo} alt="LOGO NOT FOUND" />
           </NavLink>
           <div>
             <p className="text-sm md:text-lg lg:text-xl font-bold">
-              Begum Rokeya University,Rangpur
+              Begum Rokeya University, Rangpur
             </p>
             <p className="text-sm md:text-lg lg:text-xl font-bold">
               বেগম রোকেয়া বিশ্ববিদ্যালয়, রংপুর
@@ -230,12 +76,14 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Navbar Center (Desktop) */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-sm md:text-lg font-semibold">
-          {links()}
+          {links}
         </ul>
       </div>
 
+      {/* Navbar End */}
       <div className="navbar-end gap-3">
         <ThemeToggle />
         {user && user.email ? (
