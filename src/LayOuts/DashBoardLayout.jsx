@@ -65,6 +65,9 @@ const DashBoardLayout = () => {
             <li>
               <NavLink to={"/dashboard/registrations"}>Registrations</NavLink>
             </li>
+            <li>
+              <NavLink to={"/dashboard/timetables"}>TimeTables</NavLink>
+            </li>
           </ul>
         </div>
       </div>

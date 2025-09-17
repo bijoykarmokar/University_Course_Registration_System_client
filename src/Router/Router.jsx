@@ -19,6 +19,7 @@ import DepartmentForm from '../pages/form/DepartmentForm';
 import DepartmentList from './../pages/Dashboard/Departments/DepartmentList';
 import RegistrationList from '../pages/Dashboard/Registrations/RegistrationList';
 import TimeTableForm from '../pages/form/TimeTableForm';
+import TimeTable from '../pages/Dashboard/TimeTables/TimeTable';
 
 
 
@@ -105,7 +106,7 @@ const router = createBrowserRouter([
       },
       {
         path:"timetables",
-        element:<TimeTableForm></TimeTableForm>
+        element:<TimeTable></TimeTable>
       },
       // {
       //   path:"grades",

@@ -22,7 +22,7 @@ export default function GradeList() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-8">Loading grades...</div>;
+    return <div className="text-center py-8"><span className="loading loading-dots loading-xl"></span></div>;
   }
 
   return (

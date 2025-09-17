@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
-import axiosSecure from "../../services/axiosSecure";
+import axiosSecure from "../../../services/axiosSecure";
 
 
 export default function TimeTable() {
@@ -22,7 +22,7 @@ export default function TimeTable() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-8">Loading timetables...</div>;
+    return <div className="text-center py-8"><span className="loading loading-dots loading-xl"></span></div>;
   }
 
   return (
@@ -53,12 +53,12 @@ export default function TimeTable() {
             {timetables.map((t, idx) => (
               <tr key={t._id}>
                 <th>{idx + 1}</th>
-                <td>{t.course.name}</td>
+                <td>{t.courseId}</td>
                 <td>{t.day}</td>
                 <td>{t.startTime}</td>
                 <td>{t.endTime}</td>
                 <td>{t.room}</td>
-                <td>{t.advisor.name}</td>
+                <td>{t.advisorId}</td>
                 <td>
                   <button className="btn btn-sm btn-outline btn-primary mr-2">View</button>
                   <button className="btn btn-sm btn-outline btn-secondary">Edit</button>
