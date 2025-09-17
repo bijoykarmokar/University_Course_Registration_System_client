@@ -16,6 +16,7 @@ const AdvisorForm = () => {
       _id: data._id,
       name: data.name,
       email: data.email,
+      department:data.department
     };
 
     const res = await axiosSecure.post("/advisors", advisor);
@@ -90,7 +91,20 @@ const AdvisorForm = () => {
           <input
             type="email"
             {...register("email", { required: "Email is required" })}
-            placeholder="karim@univ.edu"
+            placeholder="Enter your email"
+            className="w-full border px-3 py-2 rounded"
+          />
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
+        </div>
+        {/* departments */}
+        <div>
+          <label className="block font-medium">Departments</label>
+          <input
+            type="input"
+            {...register("department", { required: "Department is required" })}
+            placeholder="Department"
             className="w-full border px-3 py-2 rounded"
           />
           {errors.email && (

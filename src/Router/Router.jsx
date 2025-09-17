@@ -15,6 +15,10 @@ import CourseDetails from '../pages/Dashboard/Courses/CourseDetails';
 import CourseList from '../pages/Dashboard/Courses/CourseList';
 import AdvisorForm from '../pages/form/AdvisorForm';
 import AdvisorList from '../pages/Dashboard/Advisors/AdvisorList';
+import DepartmentForm from '../pages/form/DepartmentForm';
+import DepartmentList from './../pages/Dashboard/Departments/DepartmentList';
+import RegistrationList from '../pages/Dashboard/Registrations/RegistrationList';
+import TimeTableForm from '../pages/form/TimeTableForm';
 
 
 
@@ -42,7 +46,15 @@ const router = createBrowserRouter([
       {
         path:"advisorsForm",
         element:<AdvisorForm></AdvisorForm>
-      }
+      },
+      {
+        path:"departmentForm",
+        element:<DepartmentForm></DepartmentForm>
+      },
+      {
+        path:"timetables",
+        element:<TimeTableForm></TimeTableForm>
+      },
      ]
   },
   {
@@ -82,20 +94,24 @@ const router = createBrowserRouter([
       {
         path:"advisors",
         element:<AdvisorList></AdvisorList>
-      }
-      // {
-      //   path:"departments",
-      //   element:<DepartmentList></DepartmentList>
-      // },
+      },
+      {
+        path:"departments",
+        element:<DepartmentList></DepartmentList>
+      },
+      {
+        path:'registrations',
+        element:<RegistrationList></RegistrationList>
+      },
+      {
+        path:"timetables",
+        element:<TimeTableForm></TimeTableForm>
+      },
       // {
       //   path:"grades",
       //   element:<GradeForm></GradeForm>
       // },
     
-      // {
-      //   path:"timetables",
-      //   element:<TimeTable></TimeTable>
-      // },
       // {
       //   path:"users",
       //   element:<UserList></UserList>

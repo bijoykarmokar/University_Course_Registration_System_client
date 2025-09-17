@@ -17,9 +17,9 @@ const Navbar = () => {
             <li><NavLink to="/coursesForm">Courses</NavLink></li>
             <li><NavLink to="/registrations">Registrations</NavLink></li>
             <li><NavLink to="/advisorsForm">Advisors</NavLink></li>
-            <li><NavLink to="/departments">Departments</NavLink></li>
-            {/* <li><NavLink to="/timetables">TimeTables</NavLink></li>
-            <li><NavLink to="/grades">Grades</NavLink></li>
+            <li><NavLink to="/departmentForm">Departments</NavLink></li>
+            <li><NavLink to="/timetables">TimeTables</NavLink></li>
+            {/* <li><NavLink to="/grades">Grades</NavLink></li>
             <li><NavLink to="/users">Users</NavLink></li> */}
             {
               user && <>
@@ -67,10 +67,10 @@ const Navbar = () => {
           </NavLink>
           <div>
             <p className="text-sm md:text-lg lg:text-xl font-bold">
-              Begum Rokeya University, Rangpur
+              University
             </p>
             <p className="text-sm md:text-lg lg:text-xl font-bold">
-              বেগম রোকেয়া বিশ্ববিদ্যালয়, রংপুর
+              বিশ্ববিদ্যালয়
             </p>
           </div>
         </div>

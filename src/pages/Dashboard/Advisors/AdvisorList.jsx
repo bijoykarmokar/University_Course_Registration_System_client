@@ -1,38 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import axiosSecure from "../../../services/axiosSecure";
 import { useQuery } from "@tanstack/react-query";
-
+import Swal from "sweetalert2";
 
 export default function AdvisorList() {
-  // const [advisors, setAdvisors] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
-   const {data:advisors=[],isLoading} = useQuery({
-     queryKey:["advisors"],
-     queryFn: async()=>{
+  const {
+    data: advisors = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["advisors"],
+    queryFn: async () => {
       const res = await axiosSecure.get("/advisors");
       return res.data;
-     }
-   })
+    },
+  });
 
+  const handleDelete = async (id) => {
+    try {
+      const confirm = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
 
-  // useEffect(() => {
-  //   const fetchAdvisors = async () => {
-  //     try {
-  //       const res = await axiosSecure.get("/advisors");
-  //       setAdvisors(res.data);
-  //     } catch (err) {
-  //       console.error("Error fetching advisors:", err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchAdvisors();
-  // }, []);
+      if (confirm.isConfirmed) {
+        const res = await axiosSecure.delete(`/advisors/${id}`);
+        if (res.data.deletedCount) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Advisor has been deleted successfully.",
+            icon: "success",
+          });
+          refetch(); // refresh advisor list
+        }
+      }
+    } catch (error) {
+      console.error("Delete error:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong while deleting!",
+      });
+    }
+  };
 
   if (isLoading) {
-    return <div className="text-center py-8"> <span className="loading loading-dots loading-xl"></span></div>;
+    return (
+      <div className="text-center py-8">
+        <span className="loading loading-dots loading-xl"></span>
+      </div>
+    );
   }
 
   return (
@@ -62,13 +85,13 @@ export default function AdvisorList() {
                 <th>{idx + 1}</th>
                 <td className="font-medium">{a.name}</td>
                 <td>{a.email}</td>
-                <td>{a.department}</td>
+                <td>{a.department || "N/A"}</td>
                 <td>
-                  <button className="btn btn-sm btn-outline btn-primary mr-2">
-                    View
-                  </button>
-                  <button className="btn btn-sm btn-outline btn-secondary">
-                    Edit
+                  <button
+                    onClick={() => handleDelete(a._id)}
+                    className="btn btn-sm btn-outline btn-error"
+                  >
+                    Delete
                   </button>
                 </td>
               </tr>

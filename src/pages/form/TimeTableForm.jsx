@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCalendarPlus } from "react-icons/fa";
+import Swal from "sweetalert2";
 import axiosSecure from "../../services/axiosSecure";
+
 
 export default function TimeTableForm() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -39,18 +41,18 @@ export default function TimeTableForm() {
         endTime: data.endTime,
         room: data.room,
       });
-      alert("TimeTable added successfully!");
+      Swal.fire("Success","TimeTable added successfully!","success");
       reset();
     } catch (err) {
       console.error(err);
-      alert("Failed to add timetable.");
+      Swal.fire("Error","Failed to add timetable.","error");
     } finally {
       setSubmitting(false);
     }
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading courses and advisors...</div>;
+    return <div className="text-center py-8"><span className="loading loading-dots loading-xl"></span></div>;
   }
 
   return (

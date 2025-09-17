@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaBuilding } from "react-icons/fa";
-import axiosSecure from "../../services/axiosSecure";
+import axiosSecure from "../../../services/axiosSecure";
 
 
 export default function DepartmentList() {
